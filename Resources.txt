@@ -1,0 +1,7 @@
+Websites used for development of this project:
+
+developers.google.com
+knockoutjs.com
+stackoverflow.com
+www.w3schools.com
+jshint.com
