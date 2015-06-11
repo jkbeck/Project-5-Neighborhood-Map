@@ -10,3 +10,7 @@ Search bar can search for other places and will show a list of returned results 
 Clicking on either map markers or one of the search results in the list will show a Google Street View of that place.
 
 Clicking on a map marker will show a custom infobox, not the standard infowindow.
+
+Use the URL below to check out my project.
+
+http://jkbeck.github.io/Project-5-Neighborhood-Map/index.html

@@ -54,7 +54,8 @@ html, body, #map-canvas {
 
 .title {
 	text-align: center;
-	background-color: #4cbb17;
+	background-color: #3D731E;
+	color: #FFE436;
 	padding: 10px;
   	margin: 0px;
 }
@@ -127,8 +128,9 @@ li.results-li:hover {
 
 .infobox-inner {
 	font-size:15px;
-	border: 1px solid #ccc;
+	border: 3px solid #3D731E;
+	border-radius: 5px;
 	margin-top: 8px;
-	background: #fff;
+	background: #FFE436;
 	padding: 5px;
 }
