@@ -1,0 +1,134 @@
+/*Map styles*/
+html, body, #map-canvas {
+    height: 98%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.controls {
+    margin-top: 16px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 400px;
+}
+
+#pac-input:focus {
+    border-color: #4d90fe;
+}
+
+.pac-container {
+    font-family: Roboto;
+}
+
+#type-selector {
+	color: #fff;
+	background-color: #4d90fe;
+	padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+	font-family: Roboto;
+	font-size: 13px;
+	font-weight: 300;
+}
+
+#target {
+	width: 345px;
+}
+/*End Map styles*/
+
+.title {
+	text-align: center;
+	background-color: #4cbb17;
+	padding: 10px;
+  	margin: 0px;
+}
+/*Results box under search bar*/
+.results {
+	width: 400px;
+	height: 350px;
+	z-index: 10;
+	position: absolute;
+	top: 115px;
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	margin-left: 12px;
+	padding: 0 11px 0 13px;
+	border: 1px solid transparent;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	overflow: auto;
+}
+/*Results formatting*/
+.results-ul {
+	padding-left: 5px;
+}
+
+.results-li {
+	list-style-type: none;
+}
+
+.results-li p {
+	margin: 5px 0;
+}
+
+.results-clear {
+	color: #0000EE;
+	cursor: pointer;
+	float:right;
+}
+
+.results-title {
+	margin: 5px 0;
+}
+
+li.results-li:hover {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 0 5px;
+  background-color: #ccc;
+}
+
+.street-view {
+	margin-left: 12px;
+	width: 400px;
+	height: 250px;
+	z-index: 10;
+	position: absolute;
+	top: 470px;
+}
+
+.infobox-outer {
+	background-image: url('../images/tipbox.gif');
+	display: inline-block;
+	width: 275px;
+	position: absolute;
+}
+
+.infobox-inner {
+	font-size:15px;
+	border: 1px solid #ccc;
+	margin-top: 8px;
+	background: #fff;
+	padding: 5px;
+}
