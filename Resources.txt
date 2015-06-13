@@ -5,3 +5,4 @@ knockoutjs.com
 stackoverflow.com
 www.w3schools.com
 jshint.com
+breezometer.com/api
