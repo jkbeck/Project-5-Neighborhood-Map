@@ -57,15 +57,62 @@ var koViewModel = {
 
 	haveSearchResults : ko.observable(false),
 
+	airValue : ko.observable("No value recorded"),
+	airDesc : ko.observable("No description recorded"),
+	isVisibleBreathMtr : ko.observable(false),
+
+	resultToggle : ko.observable("H I D E"),
+
 	clearResults : function() {
+		//hide search results box
 		this.haveSearchResults(false);
+		//hide breezometer results box
+		this.isVisibleBreathMtr(false);
+		//remove streetview image
 		$("#street-image").remove();
 	},
 
 	resultClick : function(result) {
-		var address = result.formatted_address;
+		var address, setLat, setLon, searchLat, searchLon, request_url, lat, lon;
+		address = result.formatted_address;
+		//Lat & lon from my points of interest
+		setLat = result.lat;
+		setLon = result.lng;
+		//Lat & Lon from search results
+		searchLat = (typeof result.geometry) === "undefined" ? "undefined" : result.geometry.location.A;
+		searchLon = (typeof result.geometry) === "undefined" ? "undefined" : result.geometry.location.F;
+		//Setting lat and lon to be used for ajax request according to which variables are defined
+		lat = searchLat !== "undefined" ? searchLat : setLat;
+		lon =  searchLon !== "undefined" ? searchLon : setLon;
+		//Build ajax request url
+		request_url = "http://api-beta.breezometer.com/baqi/?lat=" + lat + "&lon=" + lon;
+		request_url += "&key=3817f9688d5843e7808fdb7730629327";
+		//console.log(request_url);
+
+		//Ajax request to breazometer.com
+		$.ajax({
+		  	url: request_url,
+		  	dataType: "json",
+		  	success: function(data) {
+		  		if(data.data_valid === true){
+		  			//console.log("Ajax success");
+		  			koViewModel.airDesc(data.breezometer_description);
+		  			koViewModel.airValue(data.breezometer_aqi);
+		  		} else if(data.data_valid === false){
+		  			console.log("Ajax data retrieval failure due to " + data.error);
+		  		} else {
+		  			console.log("Unknown Ajax error");
+		  		}
+		  	},
+		  	error: function(){
+		  		console.log("Problem with ajax request");
+		  	}
+		});
+
+		koViewModel.isVisibleBreathMtr(true);
 		$("#street-image").remove();
 		$("#street-view").append('<img id="street-image" src="https://maps.googleapis.com/maps/api/streetview?size=400x250&location=' + address + '">');
+
 	},
 
 };
@@ -240,3 +287,17 @@ var mapView = {
 	}
 };
 google.maps.event.addDomListener(window, 'load', mapView.init);
+
+var clicked = 0;
+
+$("#hide-show-btn").click("click", function(){
+	if(clicked === 0){
+		$("#left-info").addClass("results-hide");
+		koViewModel.resultToggle("S H O W");
+		clicked = 1;
+	} else {
+		$("#left-info").removeClass("results-hide");
+		koViewModel.resultToggle("H I D E");
+		clicked = 0;
+	}
+});

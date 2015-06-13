@@ -60,17 +60,47 @@ html, body, #map-canvas {
   	margin: 0px;
 }
 /*Results box under search bar*/
-.results {
-	width: 400px;
-	height: 350px;
+.info-container {
+	width: 430px;
+	height: 635px;
+	/*border: 1px solid black;*/
 	z-index: 10;
 	position: absolute;
-	top: 115px;
+	top: 110px;
+	-webkit-transition: transform 3s; /* For Safari 3.1 to 6.0 */
+	transition: transform 2s;
+}
+
+.results-hide {
+	transform: translateX(-410px);
+}
+
+.hide-show-btn {
+	position: absolute;
+	top: 100px;
+	left: 409px;
+	width: 13px;
+	border: 2px solid #3D731E;
+	background-color: #FFE436;
+	text-align: center;
+	border-radius: 5px;
+	padding: 2px 4px 2px 6px;
+	z-index: -1;
+	cursor: pointer;
+}
+
+.results {
+	width: 400px;
+	height: 300px;
+	z-index: 10;
+	/*position: absolute;
+	top: 115px;*/
 	background-color: #fff;
 	font-family: Roboto;
 	font-size: 15px;
 	font-weight: 300;
 	margin-left: 12px;
+	margin-bottom: 5px;
 	padding: 0 11px 0 13px;
 	border: 1px solid transparent;
 	border-radius: 2px 0 0 2px;
@@ -110,13 +140,34 @@ li.results-li:hover {
   background-color: #ccc;
 }
 
+.breath-mtr-container {
+	margin-left: 12px;
+	margin-bottom: 5px;
+	width: 400px;
+	height: 70px;
+	z-index: 10;
+	/*position: absolute;
+	top: 420px;*/
+	background-color: #fff;
+}
+
+.breath-img {
+	float: left;
+}
+
+.breath-results {
+	padding: 0px 0px 0px 10px;
+	display: inline-block;
+	line-height: 0.7;
+}
+
 .street-view {
 	margin-left: 12px;
 	width: 400px;
 	height: 250px;
 	z-index: 10;
-	position: absolute;
-	top: 470px;
+/*	position: absolute;
+	top: 495px;*/
 }
 
 .infobox-outer {
