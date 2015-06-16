@@ -11,6 +11,7 @@ html, body, #map-canvas {
     border-radius: 2px 0 0 2px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
+    width: 25%;
     height: 32px;
     outline: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
@@ -24,7 +25,8 @@ html, body, #map-canvas {
     margin-left: 12px;
     padding: 0 11px 0 13px;
     text-overflow: ellipsis;
-    width: 400px;
+    /*width: 400px;*/
+    width: 23.9%;
 }
 
 #pac-input:focus {
@@ -61,7 +63,8 @@ html, body, #map-canvas {
 }
 /*Results box under search bar*/
 .info-container {
-	width: 430px;
+	/*width: 430px;*/
+	width: 25%;
 	height: 635px;
 	/*border: 1px solid black;*/
 	z-index: 10;
@@ -78,7 +81,8 @@ html, body, #map-canvas {
 .hide-show-btn {
 	position: absolute;
 	top: 100px;
-	left: 409px;
+	/*left: 409px;*/
+	left: 97.5%;
 	width: 13px;
 	border: 2px solid #3D731E;
 	background-color: #FFE436;
@@ -90,7 +94,8 @@ html, body, #map-canvas {
 }
 
 .results {
-	width: 400px;
+	/*width: 400px;*/
+	width: 95.5%;
 	height: 300px;
 	z-index: 10;
 	/*position: absolute;
@@ -143,12 +148,21 @@ li.results-li:hover {
 .breath-mtr-container {
 	margin-left: 12px;
 	margin-bottom: 5px;
-	width: 400px;
+	/*width: 400px;*/
+	width: 95.5%;
 	height: 70px;
 	z-index: 10;
 	/*position: absolute;
 	top: 420px;*/
 	background-color: #fff;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	background-image: url("../images/breezometer_logo.png");
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 .breath-img {
@@ -156,14 +170,17 @@ li.results-li:hover {
 }
 
 .breath-results {
-	padding: 0px 0px 0px 10px;
-	display: inline-block;
+	font-family: Roboto;
+	padding-left: 19%;
+	display: flex;
 	line-height: 0.7;
+
 }
 
 .street-view {
 	margin-left: 12px;
-	width: 400px;
+	/*width: 400px;*/
+	width: 95.5%;
 	height: 250px;
 	z-index: 10;
 /*	position: absolute;
@@ -184,4 +201,96 @@ li.results-li:hover {
 	margin-top: 8px;
 	background: #FFE436;
 	padding: 5px;
+}
+
+@media screen and (max-width : 770px) {
+	.info-container,
+	.controls {
+		width: 35%;
+	}
+	#pac-input {
+		width: 33.5%;
+	}
+	.breath-results {
+		display: inline-block;
+	}
+	p.airdata.airdata-1 {
+  		margin: 7px 0px 0px 40px;
+	}
+	p.airdata.airdata-2 {
+  		margin: 10px 0px 0px 30px;
+  		text-align: center;
+	}
+	.results-hide {
+		transform: translateX(-266px);
+	}
+}
+
+@media screen and (max-width : 770px) {
+	.info-container {
+		top: 147px;
+	}
+	.results {
+		height: 220px;
+	}
+	.breath-mtr-container {
+		background-position-y: 10px;
+		height: 56px;
+	}
+	p.airdata.airdata-1 {
+		font-size: 15px;
+		margin: 7px 0px 0px 36px;
+		line-height: 1;
+	}
+	p.airdata.airdata-2 {
+		display: none;
+	}
+}
+
+@media screen and (max-width : 320px) {
+	.title {
+		font-size:25px;
+	}
+	#pac-input {
+		width: 70%;
+	}
+	.info-container {
+		top: 100px;
+		width: 72.9%;
+	}
+	.hide-show-btn {
+		left: 98.5%;
+		top: 35px;
+	}
+	.results {
+		font-size: 12px;
+		height: 151px;
+	}
+	.results-hide {
+		transform: translateX(-235px);
+	}
+	.breath-mtr-container {
+   		background-position-y: 0px;
+   	}
+	p.airdata.airdata-1 {
+  		font-size: 14px;
+  		margin: 11px 0px 0px 28px;
+  	}
+  	.infobox-inner {
+		font-size: 13px;
+	}
+}
+
+@media screen and (max-width : 240px) {
+	.title {
+		font-size:20px;
+	}
+	.breath-mtr-container {
+  		background-position-y: 0px;
+		height: 48px;
+	}
+	p.airdata.airdata-1 {
+  		font-size: 13px;
+  		margin: 3px 0px 0px 40px;
+  	}
 }
