@@ -8,12 +8,12 @@
 
 	</head>
 	<body>
-		<h1 class="title">Portland, Oregon - "Put a Bird on it!"</h1>
+		<h1 class="title">Portland, Oregon</h1>
 		<input id="pac-input" class="controls" type="text" placeholder="Search Box">
-		<div id="left-info" class="info-container">
+		<div id="left-info" class="info-container results-hide">
 			<div id="hide-show-btn" class="hide-show-btn" data-bind="text: resultToggle, visible: haveSearchResults"></div>
 			<div id="search-results" class="results" data-bind="visible: haveSearchResults">
-				<p class="results-title">Search Results:<button data-bind="click: clearResults" class="results-clear">Clear results</button></p>
+				<p class="results-title">Search Results:<button data-bind="click: clearResults" class="results-clear">Clear</button></p>
 				<ul id="results-list" class="results-ul" data-bind="foreach: searchResults">
 					<li class="results-li" data-bind="click: $parent.resultClick">
 						<p data-bind="text: name"></p>
@@ -23,10 +23,9 @@
 				</ul>
 			</div>
 			<div id="breath-mtr-container" class="breath-mtr-container" data-bind="visible: isVisibleBreathMtr">
-				<img id="breath-img" class="breath-img" src="images/breezometer-logo-130x70.jpg">
 				<div id="breath-results" class="breath-results">
-					<p>Air Quality Rating:&nbsp;<span data-bind="text: airValue"></span></p>
-					<p><span data-bind="text: airDesc"></span></p>
+					<p class="airdata airdata-1">Air Quality Rating:&nbsp;(<span data-bind="text: airValue"></span>)&nbsp;</p>
+					<p class="airdata airdata-2"><span data-bind="text: airDesc"></span></p>
 	      		</div>
 			</div>
 			<div id="street-view" class="street-view"></div>

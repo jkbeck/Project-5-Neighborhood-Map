@@ -40,6 +40,10 @@ var model = {
   	defaultBounds : new google.maps.LatLngBounds(
 			new google.maps.LatLng(45.6, -122.75),
 			new google.maps.LatLng(45.45, -122.65)),
+
+  	screenwidth : $(window).width(),
+
+	screenheight : $(window).height(),
 };
 
 //Start of view-model
@@ -62,6 +66,7 @@ var koViewModel = {
 	isVisibleBreathMtr : ko.observable(false),
 
 	resultToggle : ko.observable("H I D E"),
+	clickCount : 0,
 
 	clearResults : function() {
 		//hide search results box
@@ -73,7 +78,7 @@ var koViewModel = {
 	},
 
 	resultClick : function(result) {
-		var address, setLat, setLon, searchLat, searchLon, request_url, lat, lon;
+		var address, setLat, setLon, searchLat, searchLon, request_url, lat, lon, streetWide, streetHeight;
 		address = result.formatted_address;
 		//Lat & lon from my points of interest
 		setLat = result.lat;
@@ -110,13 +115,44 @@ var koViewModel = {
 		});
 
 		koViewModel.isVisibleBreathMtr(true);
-		$("#street-image").remove();
-		$("#street-view").append('<img id="street-image" src="https://maps.googleapis.com/maps/api/streetview?size=400x250&location=' + address + '">');
 
+		//Get screensize to diplay proper sized streetview depending on screenwidth
+		if(model.screenwidth > 768){
+			streetWide = Math.round(model.screenwidth * 0.239);
+			streetHeight = Math.round(streetWide * 0.667);
+		} else if(model.screenwidth <= 768 && model.screenwidth > 321) {
+			streetWide = Math.round(model.screenwidth * 0.333);
+			streetHeight = Math.round(streetWide * 0.667);
+		} else if(model.screenwidth <= 320 ) {
+			streetWide = Math.round(model.screenwidth * 0.698);
+			streetHeight = Math.round(streetWide * 0.667);
+		};
+
+		$("#street-image").remove();
+		if(model.screenwidth >=320){
+			$("#street-view").append('<img id="street-image" src="https://maps.googleapis.com/maps/api/streetview?size=' + streetWide +
+			'x' + streetHeight + '&location=' + address + '">');
+		}
 	},
+
+	hideShow : function(){
+		$("#hide-show-btn").click("click", function(){
+			if(koViewModel.clickCount === 0){
+				$("#left-info").addClass("results-hide");
+				koViewModel.resultToggle("S H O W");
+				koViewModel.clickCount = 1;
+			} else {
+				$("#left-info").removeClass("results-hide");
+				koViewModel.resultToggle("H I D E");
+				koViewModel.clickCount = 0;
+			}
+		});
+	}
 
 };
 ko.applyBindings(koViewModel);
+
+
 
 //Start of Views
 var mapView = {
@@ -149,6 +185,7 @@ var mapView = {
 				koViewModel.searchResults.push(places[i]);
 			}
 			koViewModel.haveSearchResults(true);
+			$("#left-info").removeClass("results-hide");
 
 			if (places.length === 0) {
 				return;
@@ -231,8 +268,10 @@ var mapView = {
 		});
 		//Search box end
 
-
+		//Place my points of interest markers
 		mapView.setMarkers(map, viewModel.myLocs);
+		//Enable hide/show javascript for results window
+		koViewModel.hideShow();
 	},
 
 	//Add my points of interest markers to the map on page load
@@ -287,17 +326,3 @@ var mapView = {
 	}
 };
 google.maps.event.addDomListener(window, 'load', mapView.init);
-
-var clicked = 0;
-
-$("#hide-show-btn").click("click", function(){
-	if(clicked === 0){
-		$("#left-info").addClass("results-hide");
-		koViewModel.resultToggle("S H O W");
-		clicked = 1;
-	} else {
-		$("#left-info").removeClass("results-hide");
-		koViewModel.resultToggle("H I D E");
-		clicked = 0;
-	}
-});
