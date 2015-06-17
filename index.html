@@ -3,19 +3,18 @@
 	<head>
 		<title>Map Project</title>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    	<meta charset="utf-8">
+		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/style.css">
-
 	</head>
 	<body>
 		<h1 class="title">Portland, Oregon</h1>
-		<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+		<input id="pac-input" class="pac-input controls" type="text" placeholder="Search Box">
 		<div id="left-info" class="info-container results-hide">
 			<div id="hide-show-btn" class="hide-show-btn" data-bind="text: resultToggle, visible: haveSearchResults"></div>
 			<div id="search-results" class="results" data-bind="visible: haveSearchResults">
 				<p class="results-title">Search Results:<button data-bind="click: clearResults" class="results-clear">Clear</button></p>
 				<ul id="results-list" class="results-ul" data-bind="foreach: searchResults">
-					<li class="results-li" data-bind="click: $parent.resultClick">
+					<li id="" class="results-li" data-bind="click: $parent.resultClick, click: $parent.selectMarker">
 						<p data-bind="text: name"></p>
 						<p data-bind="text:formatted_address"></p>
 					</li>
@@ -30,15 +29,11 @@
 			</div>
 			<div id="street-view" class="street-view"></div>
 		</div>
-		<div id="map-canvas"></div>
-
+		<div id="map-canvas" class="map-canvas"></div>
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 	<script src="js/infobox.js"></script>
 	<script src="js/knockout-3.3.0.js"></script>
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/view.js"></script>
-
-
-
 	</body>
 </html>

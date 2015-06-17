@@ -1,34 +1,35 @@
+"use strict";
 //Start of models
 var model = {
 	//My points of interest
 	myLocs : [
 	{
 		name : "McMenamins",
-		lat: "45.528368",
-		lng: "-122.683604",
+		lat : "45.528368",
+		lng : "-122.683604",
 		formatted_address : "303 SW 12th Ave Portland, OR 97205",
-		content: "Try the tator tots!",
+		content : "Try the tator tots!",
 	},
 	{
 		name : "McMenamins Rams Head",
-		lat: "45.532216",
-		lng: "-122.700427",
+		lat : "45.532216",
+		lng : "-122.700427",
 		formatted_address : "2282 NW Hoyt St Portland, OR 97210",
-		content: "Try the Terminator Stout!",
+		content : "Try the Terminator Stout!",
 	},
 	{
 		name : "Powell's City of Books",
-		lat: "45.523353",
-		lng: "-122.681456",
+		lat : "45.523353",
+		lng : "-122.681456",
 		formatted_address : "1005 W Burnside St Portland, OR 97209",
-		content: "Open 9am to 11pm",
+		content : "Open 9am to 11pm",
 	},
 	{
 		name : "Olympic Provisions",
-		lat: "45.522800",
-		lng: "-122.663490",
+		lat : "45.522800",
+		lng : "-122.663490",
 		formatted_address : "107 SE Washington St Portland, OR 97214",
-		content: "Open 11am to 10pm",
+		content : "Open 11am to 10pm",
 	}
 	],
 
@@ -44,6 +45,8 @@ var model = {
   	screenwidth : $(window).width(),
 
 	screenheight : $(window).height(),
+
+	searchMarkers : [],
 };
 
 //Start of view-model
@@ -79,6 +82,7 @@ var koViewModel = {
 
 	resultClick : function(result) {
 		var address, setLat, setLon, searchLat, searchLon, request_url, lat, lon, streetWide, streetHeight;
+
 		address = result.formatted_address;
 		//Lat & lon from my points of interest
 		setLat = result.lat;
@@ -92,7 +96,6 @@ var koViewModel = {
 		//Build ajax request url
 		request_url = "http://api-beta.breezometer.com/baqi/?lat=" + lat + "&lon=" + lon;
 		request_url += "&key=3817f9688d5843e7808fdb7730629327";
-		//console.log(request_url);
 
 		//Ajax request to breazometer.com
 		$.ajax({
@@ -118,21 +121,30 @@ var koViewModel = {
 
 		//Get screensize to diplay proper sized streetview depending on screenwidth
 		if(model.screenwidth > 768){
-			streetWide = Math.round(model.screenwidth * 0.239);
+			streetWide = Math.round(model.screenwidth * 0.241);
 			streetHeight = Math.round(streetWide * 0.667);
-		} else if(model.screenwidth <= 768 && model.screenwidth > 321) {
+		} else if(model.screenwidth <= 768 && model.screenwidth > 480) {
 			streetWide = Math.round(model.screenwidth * 0.333);
 			streetHeight = Math.round(streetWide * 0.667);
-		} else if(model.screenwidth <= 320 ) {
+		} else if(model.screenwidth <= 480 && model.screenwidth > 321) {
+			streetWide = Math.round(model.screenwidth * 0.5);
+			streetHeight = Math.round(streetWide * 0.667);
+		} else if(model.screenwidth <= 320) {
 			streetWide = Math.round(model.screenwidth * 0.698);
 			streetHeight = Math.round(streetWide * 0.667);
-		};
-
+		}
+		//If screen >= 320 then add streetview
 		$("#street-image").remove();
 		if(model.screenwidth >=320){
 			$("#street-view").append('<img id="street-image" src="https://maps.googleapis.com/maps/api/streetview?size=' + streetWide +
 			'x' + streetHeight + '&location=' + address + '">');
 		}
+	},
+
+	//Needed separate click event for selecting marker to avoid infinite click loop
+	selectMarker : function(result){
+		var clickedMarker = model.searchMarkers[result.clickId];
+		google.maps.event.trigger(clickedMarker, 'click');
 	},
 
 	hideShow : function(){
@@ -148,10 +160,8 @@ var koViewModel = {
 			}
 		});
 	}
-
 };
 ko.applyBindings(koViewModel);
-
 
 
 //Start of Views
@@ -181,13 +191,18 @@ var mapView = {
 
 			koViewModel.searchResults.removeAll();
 
-			for(var i = 0; i < places.length; i++){
+			var placesLength = places.length;
+
+			for(var i = 0; i < placesLength; i++){
+				places[i].clickId = [i];
 				koViewModel.searchResults.push(places[i]);
+				//console.log(places[i].clickId);
 			}
+
 			koViewModel.haveSearchResults(true);
 			$("#left-info").removeClass("results-hide");
 
-			if (places.length === 0) {
+			if (placesLength === 0) {
 				return;
 			}
 
@@ -212,10 +227,12 @@ var mapView = {
 				    map: map,
 				    icon: image,
 				    name: place.name,
-				    position: place.geometry.location
+				    position: place.geometry.location,
+				    id: [i]
 				});
 
 				markers.push(marker);
+				model.searchMarkers = markers;
 
 				//Custom infobox with class for css and id for javascript
 				var boxText = '<div id="infobox" class="infobox-outer"><div class="infobox-inner">';
@@ -250,6 +267,10 @@ var mapView = {
 						infobox.open(map, marker);
 						//infowindow.open(map, marker);
 						koViewModel.resultClick(places[i]);
+						//Center the map on clicked marker
+						var latLng = marker.getPosition();
+						map.setCenter(latLng);
+						//var x = marker.id;
 					};
 				})(marker, i));
 
@@ -277,7 +298,9 @@ var mapView = {
 	//Add my points of interest markers to the map on page load
 	setMarkers : function(map, locations) {
 
-		for(var i = 0; i < viewModel.myLocs.length; i++){
+		var myLocLength = viewModel.myLocs.length;
+
+		for(var i = 0; i < myLocLength; i++){
 
 			//Create map marker object
 			var marker = new google.maps.Marker({
@@ -317,8 +340,13 @@ var mapView = {
 					$('#infobox').remove();
 					//Add new infobox
 					infobox.open(map, marker);
-					//
+					//Un-hide results window and display results
 					koViewModel.resultClick(viewModel.myLocs[i]);
+					$("#left-info").removeClass("results-hide");
+					//Center the map on clicked marker
+					var latLng = marker.getPosition();
+					map.setCenter(latLng);
+					console.log(marker);
 				};
 
 			})(marker, i));
