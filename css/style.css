@@ -1,72 +1,56 @@
 /*Map styles*/
-html, body, #map-canvas {
-    height: 98%;
-    margin: 0px;
-    padding: 0px;
+html,
+body,
+.map-canvas {
+	height: 98%;
+	margin: 0;
+	padding: 0;
 }
 
 .controls {
-    margin-top: 16px;
-    border: 1px solid transparent;
-    border-radius: 2px 0 0 2px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    width: 25%;
-    height: 32px;
-    outline: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	margin-top: 16px;
+	border: 1px solid transparent;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	width: 25%;
+	height: 32px;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-#pac-input {
-    background-color: #fff;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    /*width: 400px;*/
-    width: 23.9%;
+.pac-input {
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	margin-left: 12px;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	/*width: 400px;*/
+	width: 23.9%;
 }
 
-#pac-input:focus {
-    border-color: #4d90fe;
+.pac-input:focus {
+	border-color: #4d90fe;
 }
 
 .pac-container {
-    font-family: Roboto;
-}
-
-#type-selector {
-	color: #fff;
-	background-color: #4d90fe;
-	padding: 5px 11px 0px 11px;
-}
-
-#type-selector label {
 	font-family: Roboto;
-	font-size: 13px;
-	font-weight: 300;
-}
-
-#target {
-	width: 345px;
 }
 /*End Map styles*/
 
 .title {
 	text-align: center;
-	background-color: #3D731E;
-	color: #FFE436;
+	background-color: #3d831e;
+	color: #ffe436;
 	padding: 10px;
-  	margin: 0px;
+	margin: 0;
 }
 /*Results box under search bar*/
 .info-container {
-	/*width: 430px;*/
 	width: 25%;
 	height: 635px;
-	/*border: 1px solid black;*/
 	z-index: 10;
 	position: absolute;
 	top: 110px;
@@ -81,11 +65,10 @@ html, body, #map-canvas {
 .hide-show-btn {
 	position: absolute;
 	top: 100px;
-	/*left: 409px;*/
 	left: 97.5%;
 	width: 13px;
-	border: 2px solid #3D731E;
-	background-color: #FFE436;
+	border: 2px solid #3d831e;
+	background-color: #ffe436;
 	text-align: center;
 	border-radius: 5px;
 	padding: 2px 4px 2px 6px;
@@ -94,12 +77,9 @@ html, body, #map-canvas {
 }
 
 .results {
-	/*width: 400px;*/
 	width: 95.5%;
 	height: 300px;
 	z-index: 10;
-	/*position: absolute;
-	top: 115px;*/
 	background-color: #fff;
 	font-family: Roboto;
 	font-size: 15px;
@@ -139,21 +119,18 @@ html, body, #map-canvas {
 }
 
 li.results-li:hover {
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  padding: 0 5px;
-  background-color: #ccc;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding: 0 5px;
+	background-color: #ccc;
 }
 
 .breath-mtr-container {
 	margin-left: 12px;
 	margin-bottom: 5px;
-	/*width: 400px;*/
 	width: 95.5%;
 	height: 70px;
 	z-index: 10;
-	/*position: absolute;
-	top: 420px;*/
 	background-color: #fff;
 	border-radius: 2px 0 0 2px;
 	box-sizing: border-box;
@@ -171,24 +148,25 @@ li.results-li:hover {
 
 .breath-results {
 	font-family: Roboto;
-	padding-left: 19%;
-	display: flex;
-	line-height: 0.7;
+	margin-left: 25px;
+	display: inline-block;
+	width: 100%;
+}
 
+p.airdata {
+	margin: 3px 0 0 10px;
+	text-align: center;
 }
 
 .street-view {
 	margin-left: 12px;
-	/*width: 400px;*/
 	width: 95.5%;
 	height: 250px;
 	z-index: 10;
-/*	position: absolute;
-	top: 495px;*/
 }
 
 .infobox-outer {
-	background-image: url('../images/tipbox.gif');
+	background-image: url(../images/tipbox.gif);
 	display: inline-block;
 	width: 275px;
 	position: absolute;
@@ -196,10 +174,10 @@ li.results-li:hover {
 
 .infobox-inner {
 	font-size:15px;
-	border: 3px solid #3D731E;
+	border: 3px solid #3d831e;
 	border-radius: 5px;
 	margin-top: 8px;
-	background: #FFE436;
+	background: #ffe436;
 	padding: 5px;
 }
 
@@ -208,38 +186,48 @@ li.results-li:hover {
 	.controls {
 		width: 35%;
 	}
-	#pac-input {
+	.pac-input {
 		width: 33.5%;
 	}
 	.breath-results {
 		display: inline-block;
 	}
 	p.airdata.airdata-1 {
-  		margin: 7px 0px 0px 40px;
+		margin: 7px 0 0 40px;
 	}
 	p.airdata.airdata-2 {
-  		margin: 10px 0px 0px 30px;
-  		text-align: center;
+		margin: 10px 0 0 30px;
+		text-align: center;
 	}
 	.results-hide {
 		transform: translateX(-266px);
 	}
 }
 
-@media screen and (max-width : 770px) {
+@media screen and (max-width : 480px) {
+	.pac-input {
+		width: 50%;
+	}
 	.info-container {
-		top: 147px;
+		top: 110px;
+		width: 52.4%;
+	}
+	.hide-show-btn {
+		left: 98.5%;
+		top: 80px;
 	}
 	.results {
 		height: 220px;
 	}
+	.results-hide {
+		transform: translateX(-250px);
+	}
 	.breath-mtr-container {
-		background-position-y: 10px;
 		height: 56px;
 	}
 	p.airdata.airdata-1 {
 		font-size: 15px;
-		margin: 7px 0px 0px 36px;
+		margin: 12px 0 0 28px;
 		line-height: 1;
 	}
 	p.airdata.airdata-2 {
@@ -251,7 +239,7 @@ li.results-li:hover {
 	.title {
 		font-size:25px;
 	}
-	#pac-input {
+	.pac-input {
 		width: 70%;
 	}
 	.info-container {
@@ -269,14 +257,11 @@ li.results-li:hover {
 	.results-hide {
 		transform: translateX(-235px);
 	}
-	.breath-mtr-container {
-   		background-position-y: 0px;
-   	}
 	p.airdata.airdata-1 {
-  		font-size: 14px;
-  		margin: 11px 0px 0px 28px;
-  	}
-  	.infobox-inner {
+		font-size: 14px;
+		margin: 11px 0 0 13px;
+	}
+	.infobox-inner {
 		font-size: 13px;
 	}
 }
@@ -286,11 +271,10 @@ li.results-li:hover {
 		font-size:20px;
 	}
 	.breath-mtr-container {
-  		background-position-y: 0px;
 		height: 48px;
 	}
 	p.airdata.airdata-1 {
-  		font-size: 13px;
-  		margin: 3px 0px 0px 40px;
-  	}
+		font-size: 13px;
+		margin: 3px 0 0 40px;
+	}
 }
