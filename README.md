@@ -11,7 +11,9 @@ Clicking on either map markers or one of the search results in the list will sho
 
 Clicking on a map marker will show a custom infobox, not the standard infowindow.
 
-Added responsive design changes for various sizes of screens. 
+Clicking the Hide/Show tab to the right of the search results will move results off the screen for better viewing of the map.
+
+Added responsive design changes for various sizes of screens using www.studiopress.com/responsive for testing.
 
 Use the URL below to check out my project.
 
