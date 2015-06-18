@@ -27,7 +27,6 @@ body,
 	margin-left: 12px;
 	padding: 0 11px 0 13px;
 	text-overflow: ellipsis;
-	/*width: 400px;*/
 	width: 23.9%;
 }
 
@@ -59,7 +58,7 @@ body,
 }
 
 .results-hide {
-	transform: translateX(-410px);
+	transform: translateX(-98%);
 }
 
 .hide-show-btn {
@@ -137,7 +136,7 @@ li.results-li:hover {
 	-moz-box-sizing: border-box;
 	outline: none;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-	background-image: url("../images/breezometer_logo.png");
+	background-image: url(../images/breezometer_logo.png);
 	background-repeat: no-repeat;
 	background-size: contain;
 }
@@ -148,13 +147,12 @@ li.results-li:hover {
 
 .breath-results {
 	font-family: Roboto;
-	margin-left: 25px;
-	display: inline-block;
-	width: 100%;
+	margin-left: 30%;
 }
 
 p.airdata {
-	margin: 3px 0 0 10px;
+	margin: 0;
+	padding: 3px 0 0 0;
 	text-align: center;
 }
 
@@ -189,19 +187,6 @@ p.airdata {
 	.pac-input {
 		width: 33.5%;
 	}
-	.breath-results {
-		display: inline-block;
-	}
-	p.airdata.airdata-1 {
-		margin: 7px 0 0 40px;
-	}
-	p.airdata.airdata-2 {
-		margin: 10px 0 0 30px;
-		text-align: center;
-	}
-	.results-hide {
-		transform: translateX(-266px);
-	}
 }
 
 @media screen and (max-width : 480px) {
@@ -219,16 +204,12 @@ p.airdata {
 	.results {
 		height: 220px;
 	}
-	.results-hide {
-		transform: translateX(-250px);
-	}
 	.breath-mtr-container {
 		height: 56px;
 	}
 	p.airdata.airdata-1 {
 		font-size: 15px;
-		margin: 12px 0 0 28px;
-		line-height: 1;
+		padding: 12px 0 0 0;
 	}
 	p.airdata.airdata-2 {
 		display: none;
@@ -254,13 +235,6 @@ p.airdata {
 		font-size: 12px;
 		height: 151px;
 	}
-	.results-hide {
-		transform: translateX(-235px);
-	}
-	p.airdata.airdata-1 {
-		font-size: 14px;
-		margin: 11px 0 0 13px;
-	}
 	.infobox-inner {
 		font-size: 13px;
 	}
@@ -272,9 +246,5 @@ p.airdata {
 	}
 	.breath-mtr-container {
 		height: 48px;
-	}
-	p.airdata.airdata-1 {
-		font-size: 13px;
-		margin: 3px 0 0 40px;
 	}
 }
