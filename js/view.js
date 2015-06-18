@@ -44,7 +44,7 @@ var model = {
 
   	screenwidth : $(window).width(),
 
-	screenheight : $(window).height(),
+	resultsWidth : $('#search-results').width(),
 
 	searchMarkers : [],
 };
@@ -120,19 +120,9 @@ var koViewModel = {
 		koViewModel.isVisibleBreathMtr(true);
 
 		//Get screensize to diplay proper sized streetview depending on screenwidth
-		if(model.screenwidth > 768){
-			streetWide = Math.round(model.screenwidth * 0.241);
-			streetHeight = Math.round(streetWide * 0.667);
-		} else if(model.screenwidth <= 768 && model.screenwidth > 480) {
-			streetWide = Math.round(model.screenwidth * 0.333);
-			streetHeight = Math.round(streetWide * 0.667);
-		} else if(model.screenwidth <= 480 && model.screenwidth > 321) {
-			streetWide = Math.round(model.screenwidth * 0.5);
-			streetHeight = Math.round(streetWide * 0.667);
-		} else if(model.screenwidth <= 320) {
-			streetWide = Math.round(model.screenwidth * 0.698);
-			streetHeight = Math.round(streetWide * 0.667);
-		}
+		streetWide = Math.round(model.resultsWidth + 26);
+		streetHeight = Math.round(streetWide * 0.667);
+
 		//If screen >= 320 then add streetview
 		$("#street-image").remove();
 		if(model.screenwidth >=320){
