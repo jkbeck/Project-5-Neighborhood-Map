@@ -238,6 +238,9 @@ p.airdata {
 	.infobox-inner {
 		font-size: 13px;
 	}
+	p.airdata.airdata-1 {
+		font-size: 13px;
+	}
 }
 
 @media screen and (max-width : 240px) {
