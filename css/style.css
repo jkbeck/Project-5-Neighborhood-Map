@@ -95,8 +95,15 @@ body,
 	overflow: auto;
 }
 /*Results formatting*/
+.hr-clear {
+	clear: left;
+	width: 100%;
+	margin-bottom: -10px;
+}
+
 .results-ul {
 	padding-left: 5px;
+	clear: left;
 }
 
 .results-li {
@@ -111,9 +118,17 @@ body,
 	color: #0000EE;
 	cursor: pointer;
 	float:right;
+	margin: 5px 0;
 }
 
 .results-title {
+	margin: 5px 0;
+	float: left;
+	margin: 5px 0;
+}
+
+.cbratings {
+	float: left;
 	margin: 5px 0;
 }
 
@@ -152,7 +167,7 @@ li.results-li:hover {
 
 p.airdata {
 	margin: 0;
-	padding: 3px 0 0 0;
+	padding: 1% 0 0 0;
 	text-align: center;
 }
 
@@ -208,12 +223,78 @@ p.airdata {
 		height: 56px;
 	}
 	p.airdata.airdata-1 {
-		font-size: 15px;
-		padding: 12px 0 0 0;
+		font-size: 14px;
+		padding: 3% 0 0 0;
 	}
 	p.airdata.airdata-2 {
 		display: none;
 	}
+}
+/*Ipad portrait */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+	.info-container,
+	.controls {
+		width: 49%;
+	}
+	.pac-input {
+		width: 46.8%;
+	}
+}
+
+/*Ipad landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+	.info-container,
+	.controls {
+		width: 37%;
+	}
+	.pac-input {
+		width: 35.41%;
+	}
+}
+
+/*Iphone6 portrait */
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: portrait) {
+	.pac-input {
+		width: 60%;
+	}
+	.info-container {
+		width: 62.6%;
+	}
+	p.airdata.airdata-1 {
+		font-size: 14px;
+		padding: 7% 0 0 0;
+	}
+	.results-clear {
+		  position: relative;
+		  top: -60px;
+		  left: -5px;
+	}
+}
+/*Iphone6 landscape */
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: landscape) {
+	.pac-input {
+		width: 80%;
+	}
+	.info-container {
+		width: 80%;
+	}
+	.hide-show-btn {
+		left: 97%;
+		top: 10px;
+	}
+	.results {
+		height: 17%;
+	}
+	.breath-mtr-container {
+		height: 56px;
+	}
+	p.airdata {
+		margin: 0;
+		padding: 3% 0 0 2%;
+		text-align: center;
+		float: left;
+		font-size: 14px;
+  	}
 }
 
 @media screen and (max-width : 320px) {
@@ -241,6 +322,11 @@ p.airdata {
 	p.airdata.airdata-1 {
 		font-size: 13px;
 	}
+	.results-clear {
+		position: relative;
+		top: -55px;
+		left: -5px;
+	}
 }
 
 @media screen and (max-width : 240px) {
@@ -249,5 +335,15 @@ p.airdata {
 	}
 	.breath-mtr-container {
 		height: 48px;
+	}
+	.results-clear {
+		position: relative;
+		top: -56px;
+		left: -2px;
+	}
+	.cbratings {
+		width: 113%;
+		position: relative;
+		left: -12px;
 	}
 }
