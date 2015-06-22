@@ -44,7 +44,7 @@ var model = {
 
   	screenwidth : $(window).width(),
 
-	resultsWidth : $('#search-results').width(),
+	resultsWidth : $("#search-results").width(),
 
 	searchMarkers : [],
 };
@@ -61,6 +61,7 @@ var viewModel = {
 
 var koViewModel = {
 	searchResults : ko.observableArray([]),
+	initialResults : ko.observableArray([]),
 
 	haveSearchResults : ko.observable(false),
 
@@ -70,6 +71,8 @@ var koViewModel = {
 
 	resultToggle : ko.observable("H I D E"),
 	clickCount : 0,
+
+	rateSelect : ko.observable("all"),
 
 	clearResults : function() {
 		//hide search results box
@@ -153,7 +156,6 @@ var koViewModel = {
 };
 ko.applyBindings(koViewModel);
 
-
 //Start of Views
 var mapView = {
 	init : function () {
@@ -177,16 +179,22 @@ var mapView = {
 		// Listen for the event fired when the user selects an item from the
 		// pick list. Retrieve the matching places for that item.
 		google.maps.event.addListener(searchBox, 'places_changed', function() {
+			model.searchMarkers = [];
 			var places = searchBox.getPlaces();
 
 			koViewModel.searchResults.removeAll();
+			//Reset radio button to all when new search
+			koViewModel.rateSelect("all");
 
 			var placesLength = places.length;
 
 			for(var i = 0; i < placesLength; i++){
 				places[i].clickId = [i];
+				places[i].rated = places[i].rating;
 				koViewModel.searchResults.push(places[i]);
-				//console.log(places[i].clickId);
+
+				//Clone searchResults so we can go back if needed after filtering
+				koViewModel.initialResults(koViewModel.searchResults.slice(0));
 			}
 
 			koViewModel.haveSearchResults(true);
@@ -202,6 +210,7 @@ var mapView = {
 
 			// For each place, get the icon, place name, and location.
 			var bounds = new google.maps.LatLngBounds();
+			markers = [];
 
 			for (var i = 0, place; place = places[i]; i++) {
 				var image = {
@@ -224,9 +233,12 @@ var mapView = {
 				markers.push(marker);
 				model.searchMarkers = markers;
 
+				if(place.rating === undefined) {
+					place.rating = "Not yet rated";
+				}
 				//Custom infobox with class for css and id for javascript
 				var boxText = '<div id="infobox" class="infobox-outer"><div class="infobox-inner">';
-	        		boxText += place.name + "<br/>" + place.formatted_address;
+	        		boxText += place.name + "<br/>" + place.formatted_address + "<br/>Rating: "+ place.rating;
 	        		boxText += '</div></div>';
 
 				var infoboxOptions = {
@@ -260,7 +272,6 @@ var mapView = {
 						//Center the map on clicked marker
 						var latLng = marker.getPosition();
 						map.setCenter(latLng);
-						//var x = marker.id;
 					};
 				})(marker, i));
 
@@ -344,3 +355,44 @@ var mapView = {
 	}
 };
 google.maps.event.addDomListener(window, 'load', mapView.init);
+
+//Filter search results
+koViewModel.rateSelect.subscribe(function(newValue){
+	var currentRating, currentResult;
+	var resultLength = koViewModel.initialResults().length;
+	koViewModel.searchResults.removeAll();
+
+	switch(newValue) {
+		case "all":
+			koViewModel.searchResults(koViewModel.initialResults.slice(0));
+			break;
+		case "2":
+			for(var i = 0; i < resultLength; i++){
+				currentRating = koViewModel.initialResults()[i].rating;
+				currentResult = koViewModel.initialResults()[i];
+				//console.log(currentRating);
+				if(currentRating >= 2){
+					koViewModel.searchResults.push(currentResult);
+				}
+			}
+			break;
+		case "3":
+			for(var i = 0; i < resultLength; i++){
+				currentRating = koViewModel.initialResults()[i].rating;
+				currentResult = koViewModel.initialResults()[i];
+				if(currentRating >= 3){
+					koViewModel.searchResults.push(currentResult);
+				}
+			}
+			break;
+		case "4":
+			for(var i = 0; i < resultLength; i++){
+				currentRating = koViewModel.initialResults()[i].rating;
+				currentResult = koViewModel.initialResults()[i];
+				if(currentRating >= 4){
+					koViewModel.searchResults.push(currentResult);
+				}
+			}
+			break;
+	}
+});

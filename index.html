@@ -12,11 +12,26 @@
 		<div id="left-info" class="info-container results-hide">
 			<div id="hide-show-btn" class="hide-show-btn" data-bind="text: resultToggle, visible: haveSearchResults"></div>
 			<div id="search-results" class="results" data-bind="visible: haveSearchResults">
-				<p class="results-title">Search Results:<button data-bind="click: clearResults" class="results-clear">Clear</button></p>
+				<div class="results-header">
+					<p class="results-title">Show Ratings:</p>
+					<div class="cbratings">
+						<input id="cbAll" type="radio" name="cbrate" value="all" data-bind="checked : rateSelect">
+						<label for="cbAll">All</label>
+						<input id="cb2" type="radio" name="cbrate" value="2" data-bind="checked : rateSelect">
+						<label for="cb2">2+</label>
+						<input id="cb3" type="radio" name="cbrate" value="3" data-bind="checked : rateSelect">
+						<label for="cb3">3+</label>
+						<input id="cb4" type="radio" name="cbrate" value="4" data-bind="checked : rateSelect">
+						<label for="cb4">4+</label>
+					</div>
+					<button data-bind="click: clearResults" class="results-clear">Clear</button>
+					<hr class="hr-clear">
+				</div>
 				<ul id="results-list" class="results-ul" data-bind="foreach: searchResults">
 					<li class="results-li" data-bind="click: $parent.resultClick, click: $parent.selectMarker">
 						<p data-bind="text: name"></p>
-						<p data-bind="text:formatted_address"></p>
+						<p data-bind="text: formatted_address"></p>
+						<p>Rating:&nbsp;<span data-bind="text: rated || 'Not yet rated'"></span></p>
 					</li>
 					<hr>
 				</ul>
